@@ -60,7 +60,7 @@ HealRoute AI, kullanıcıların doğal dille belirttikleri tedavi ve estetik iht
 
 ## 📋 Product Backlog
 
-🔗 [Backlog Board Linki (Miro / GitHub Projects / Trello) Buraya Eklenecektir](#)
+🔗 [Trello Backlog Board](https://trello.com/invite/b/6a3fbc8a64ba7c4eed355b9c/ATTI3a02fc2e96b300a202e996bae02d7784441CC8B4/agile-sprint-board-template)
 
 ---
 
