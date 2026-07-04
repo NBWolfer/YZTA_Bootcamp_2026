@@ -6,7 +6,7 @@
 
 ## 📌 Takım İsmi
 
-**[Takım İsmi Belirlenecek]**
+Grup 27
 
 ---
 
@@ -14,10 +14,10 @@
 
 | İsim | Rol |
 |---|---|
-| [Ad Soyad] | Product Owner / Developer |
-| [Ad Soyad] | Scrum Master / Developer |
+| Selin Küçükterzi | Product Owner / Developer |
+| Mahmut Enes Çevik | Scrum Master / Developer |
+| Kerem Özdemir | Developer |
 | Ali Erkin Avcı | Developer |
-| [Ad Soyad] | Developer |
 
 ---
 
