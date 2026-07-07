@@ -107,10 +107,14 @@ Bu sprintte projenin temel yapay zeka planlama motorunu ve veri katmanını kurm
 - **4 Temmuz Cumartesi:** Sprint 1 başarıyla tamamlandı. `PRD.md` ve `README.md` dosyaları güncellenip finalize edildi, Gemini API entegrasyonu ve mock veritabanı şemaları oluşturuldu.
 
 **Sprint Board Güncellemesi**
-- Proje takibi için GitHub Projects panosu aktif olarak kullanılmaktadır. İlgili görevlerin durumları (To Do, In Progress, Done) düzenli olarak güncellenmektedir.
+- Proje takibi için Trello panosu aktif olarak kullanılmaktadır. İlgili görevlerin durumları (Done, In Progress, Sprint Backlog, Backlog) düzenli olarak güncellenmektedir.
+
+![Sprint 1 Trello Board](assets/sprint_board.png)
 
 **Ürün Durumu**
-- Gemini API ile entegre, terminal üzerinden çalışan ilk çalışan prototip (PoC) tamamlandı. Pilot bölge ve tedavi verileri mock JSON formatında sisteme bağlandı.
+- Gemini API ile entegre, terminal üzerinden çalışan ilk prototip (PoC) tamamlandı. Pilot bölge ve tedavi verileri mock JSON formatında sisteme bağlandı.
+
+![HealRoute AI Sprint 1 Prototip](assets/product_sprint1.png)
 
 **Sprint Review**
 - **Tamamlanan İşler:** Fikir seçimi yapıldı, PRD.md hazırlandı, Gemini API entegrasyonu sağlandı ve ilk mock veri kümesi oluşturuldu. Sprint hedeflerinin %100'ü başarıyla tamamlandı.
