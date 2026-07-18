@@ -53,6 +53,7 @@
   min-height: 520px;
   display: grid;
   grid-template-columns: 64px 1.25fr 360px;
+  grid-template-rows: minmax(0, 1fr);
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 22px;
@@ -129,6 +130,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  min-height: 0;
   background: #0a1020;
 }
 .chat-scenery {
@@ -184,6 +186,7 @@
   position: relative;
   z-index: 1;
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
   padding: 20px;
   display: flex;
@@ -192,12 +195,16 @@
 }
 .topic-chip {
   align-self: flex-start;
-  background: rgba(15, 22, 38, 0.82);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: rgba(15, 22, 38, 0.95);
   border: 1px solid var(--line);
   padding: 11px 15px;
   border-radius: 12px;
   font-size: 13.5px;
   font-weight: 600;
+  backdrop-filter: blur(4px);
 }
 .msg {
   display: flex;
@@ -326,6 +333,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  min-height: 0;
 }
 .trip-head {
   display: flex;
@@ -353,6 +361,7 @@
 }
 .trip-body {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
   padding: 16px 18px 18px;
 }
