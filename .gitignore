@@ -28,6 +28,7 @@ build/
 .tsbuildinfo
 tsconfig.tsbuildinfo
 tsconfig.node.tsbuildinfo
+.vite/
 
 # IDE files
 .vscode/
