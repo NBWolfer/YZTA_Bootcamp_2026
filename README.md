@@ -128,38 +128,45 @@ Bu sprintte projenin temel yapay zeka planlama motorunu ve veri katmanını kurm
 
 ### Sprint 2
 
-**Tarih Aralığı:** _(kesinleştirilecek — öneri: 13–26 Temmuz 2026)_
+**Tarih Aralığı:** 6 Temmuz 2026 – 19 Temmuz 2026
 
 **Sprint Hedefi**
 Sprint 1'de terminal üzerinde çalışan Gemini PoC'yi, `assets/product_sprint1.png` tasarımına uygun **React tabanlı web arayüzüne** taşımak; sohbet panelini ve "Trip Itinerary" (seyahat + tedavi planı) panelini yapay zeka çıktısıyla besleyen uçtan uca bir demo çıkarmak.
 
 **Backlog Düzeni ve Story Seçimleri**
-- [ ] **US-01 – Frontend iskeleti:** React (Vite + TypeScript) kurulumu, dark tema tasarım sistemi (renk/tipografi) ve üç kolonlu ana layout (rail + sohbet + plan paneli).
-- [ ] **US-02 – Sohbet arayüzü:** Mesaj listesi, kullanıcı/asistan balonları, konu başlığı çipi ve mesaj gönderme alanı.
-- [ ] **US-03 – Trip Itinerary paneli:** Itinerary Overview, Travel, Accommodation, Medical Profile, tedavi maliyeti ve tarih kartlarının bileşen olarak kurulması.
-- [ ] **US-04 – Backend API katmanı:** Terminal PoC'deki Gemini mantığının REST endpoint'lerine taşınması (`/chat`, `/plan`) — FastAPI veya Node.
-- [ ] **US-05 – Yapılandırılmış AI çıktısı:** Gemini'nin sohbetten paneli dolduracak yapılandırılmış plan JSON'u üretmesi (şema tanımı + parse).
-- [ ] **US-06 – Klinik eşleştirme motoru v1:** Mock veri üzerinde işlem türü + bölge + bütçeye göre klinik önerme mantığı.
-- [ ] **US-07 – Mock veri genişletme:** Muğla ve İstanbul için klinik/otel/uçuş mock veri setinin zenginleştirilmesi.
-- [ ] **US-08 – Yasal uyarı & rezervasyon iskeleti:** Disclaimer bileşeni ve "Proceed to Booking" için Booking.com/Skyscanner deep-link iskeleti.
-- [ ] **US-09 – Uçtan uca entegrasyon:** Frontend ↔ Backend bağlanması ve "Bodrum diş implantı" senaryosuyla demo.
+- [x] **US-01 – Frontend iskeleti:** React (Vite + TypeScript) kurulumu, dark tema tasarım sistemi (renk/tipografi) ve üç kolonlu ana layout (rail + sohbet + plan paneli). `frontend/src/theme`, `Rail.tsx`, `ChatPanel`, `TripPanel` ile tamamlandı; `npm run build` hatasız geçiyor.
+- [x] **US-02 – Sohbet arayüzü:** Mesaj listesi, kullanıcı/asistan balonları, konu başlığı çipi ve mesaj gönderme alanı. `ChatPanel`, `MessageBubble`, `TopicChip`, `Composer` bileşenleriyle tamamlandı.
+- [x] **US-03 – Trip Itinerary paneli:** Itinerary Overview, Travel, Accommodation, Medical Profile, tedavi maliyeti ve tarih kartlarının bileşen olarak kurulması. `TripPanel` altında ilgili tüm kart bileşenleri mevcut.
+- [x] **US-04 – Backend API katmanı:** Terminal PoC'deki planlama mantığının REST endpoint'ine taşınması — FastAPI ile `POST /api/chat` ve `GET /health` uçları çalışır durumda (canlı test edildi). Not: Ayrı bir `/plan` endpoint'i açılmadı; plan verisi `/api/chat` yanıtına gömülü olarak dönüyor.
+- [ ] **US-05 – Yapılandırılmış AI çıktısı:** *(Kısmi)* `TripPlan` JSON şeması (`backend/app/models/schemas.py`) tanımlandı ve kural tabanlı mock planlayıcı (`services/planner.py`) bu şemaya uygun veriyi güvenilir şekilde üretiyor. Ancak gerçek Gemini entegrasyonu henüz yok — `services/llm.py` içinde `_generate_with_gemini` bilinçli olarak `NotImplementedError` fırlatıp mock'a düşüyor. **Sprint 3'e taşınıyor.**
+- [x] **US-06 – Klinik eşleştirme motoru v1:** Mock veri üzerinde işlem türü + bölge/şehir + bütçeye göre klinik önerme mantığı `services/matching.py` içinde tamamlandı ve test edildi.
+- [x] **US-07 – Mock veri genişletme:** Muğla (Bodrum, Fethiye) ve İstanbul için 9 klinik, 9 doktor, 5 otel, 4 uçuş kaydından oluşan mock veri seti `backend/app/data/*.json` altında oluşturuldu.
+- [ ] **US-08 – Yasal uyarı & rezervasyon iskeleti:** *(Kısmi)* Disclaimer bileşeni (`Disclaimer.tsx`) tamamlandı ve plan panelinde gösteriliyor. Ancak "Proceed to Booking" butonu şu an işlevsiz bir `<button>` — Booking.com/Skyscanner'a giden gerçek bir deep-link (URL/href) henüz bağlanmadı. **Sprint 3'e taşınıyor.**
+- [x] **US-09 – Uçtan uca entegrasyon:** Frontend ↔ Backend bağlantısı (Vite dev proxy → FastAPI) çalışıyor; "Bodrum diş implantı" senaryosu uçtan uca test edildi ve plan paneli doğru JSON ile doluyor.
 
-> Not: Story'ler öncelik sırasındadır; ekip kapasitesine göre US-08/US-09 Sprint 3'e taşınabilir.
+> Sonuç: 9 story'den 7'si tamamlandı (US-01, 02, 03, 04, 06, 07, 09). US-05 (gerçek Gemini entegrasyonu) ve US-08 (booking deep-link) kısmi kalıp Sprint 3'e taşındı.
 
 **Daily Scrum Notları**
-_(Sprint boyunca günlük olarak doldurulacaktır.)_
+Git geçmişi bu sprint boyunca günlük commit içermiyor; ekip çalışmayı çoğunlukla yerelde ilerletip sprint sonunda tek seferde entegre etti. Kayıtlı iki dönüm noktası:
+- **7 Temmuz Salı:** Mentor geri bildirimleri README'ye işlendi (`8c00bf1 docs: mentor feedback`).
+- **18 Temmuz Cumartesi:** React frontend (Vite + TS) ve FastAPI backend'i aynı gün içinde tamamlanıp tek commit'te birleştirildi (`9fde46e feat: integrate React frontend and FastAPI backend for Sprint 2`), ardından `.gitignore` eklenip `node_modules` takipten çıkarıldı (`b06c49c`) ve `main`'e PR #1 ile merge edildi (`5dacf42`).
+- **Not (Retrospective'e taşındı):** `backend/.venv` bu commit'te yanlışlıkla ~2500 dosyayla birlikte git'e eklenmiş; sprint wrap-up'ında takipten çıkarıldı.
 
 **Sprint Board Güncellemesi**
-_(Sprint 2 Trello görünümü sprint sonunda eklenecektir.)_
+Trello panosundaki Sprint 2 kartları bu README'deki tamamlanma durumuyla eşleşecek şekilde güncellenmelidir: US-01, US-02, US-03, US-04, US-06, US-07, US-09 → **Done**; US-05, US-08 → **Sprint 3 Backlog**'a taşınmalı. (Pano ekran görüntüsü henüz eklenmedi — `assets/product_sprint2.png` / güncel Trello görseli Sprint 3 başında eklenecek.)
 
 **Ürün Durumu**
-_(Sprint sonunda: React arayüzü + canlı plan paneli demo görseli eklenecektir.)_
+Sprint 1'deki terminal PoC, dark temalı üç kolonlu bir React arayüzüne (Rail + Sohbet + Trip Itinerary paneli) taşındı ve FastAPI backend'ine bağlandı. Mock modda (`USE_GEMINI=false`, varsayılan) `/api/chat` uç noktası test edildi: "Bodrumda diş implantı yaptırmak istiyorum, 3000 GBP bütçem var" mesajı gönderildiğinde klinik, doktor, otel, uçuş ve tedavi maliyetini içeren tam bir `TripPlan` JSON'u dönüyor ve arayüzde plan paneline doğru şekilde yansıyor. Gerçek Gemini API bağlantısı henüz aktif değil (mock planlayıcıya güvenli fallback var); bu Sprint 3'ün kapsamında.
 
 **Sprint Review**
-_(Sprint sonunda doldurulacaktır.)_
+- **Tamamlanan İşler:** 9 story'den 7'si (US-01, 02, 03, 04, 06, 07, 09) tamamlandı ve kodda doğrulandı — frontend derleniyor (`npm run build`), backend canlı olarak test edildi.
+- **Tamamlanmayan/Kısmi İşler:** US-05 (gerçek Gemini entegrasyonu, şu an mock) ve US-08 (booking deep-link'i, şu an disclaimer var ama rezervasyon linki yok) Sprint 3'e devrediliyor.
+- **Genel Değerlendirme:** Sprint hedefinin özü (terminal PoC → çalışan React+FastAPI web demosu) başarıyla karşılandı; yapay zeka tarafındaki son mil (gerçek LLM çağrısı) ve rezervasyon entegrasyonu bilinçli olarak ertelendi.
 
 **Sprint Retrospective**
-_(Sprint sonunda doldurulacaktır.)_
+- **Neyin İyi Gittiği:** Frontend, backend ve mock veri katmanları birbirinden bağımsız geliştirilebilecek şekilde net ayrıştırıldı ve tek entegrasyon adımında sorunsuz birleşti; uçtan uca demo senaryosu ilk denemede çalıştı.
+- **Neyin Geliştirilebileceği:** Sprint boyunca commit sıklığı çok düşüktü (pratikte tek büyük iş commit'i) — bu hem ilerlemenin repo üzerinden izlenmesini zorlaştırdı hem de `backend/.venv`'in yanlışlıkla commit edilmesi gibi bir hataya yol açtı. Ayrıca Sprint hedefinde "US-08/US-09 Sprint 3'e taşınabilir" öngörülmüştü; gerçekte US-09 tamamlandı ama US-05 kısmi kaldı — kapsam tahmini gözden geçirilmeli.
+- **Aksiyon Planı:** Sprint 3'te (1) daha sık ve küçük commit'ler atılacak, (2) `.venv`/`node_modules` gibi üretilmiş klasörlerin ilk kurulumda `.gitignore`'a eklenip hiç commit edilmemesi için commit öncesi `git status` kontrolü alışkanlık haline getirilecek, (3) gerçek Gemini entegrasyonu (US-05) ve Booking.com/Skyscanner deep-link'i (US-08) önceliklendirilecek.
 
 ---
 
