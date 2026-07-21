@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: healroute-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /health
+    envVars:
+      - key: USE_GEMINI
+        value: "false"
+      - key: ALLOWED_ORIGINS
+        value: https://frontend-lemon-eta-50.vercel.app
