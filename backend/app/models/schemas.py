@@ -18,6 +18,7 @@ class Overview(BaseModel):
 class Travel(BaseModel):
     origin: str
     destination: str
+    destinationCity: str
     airline: str
     priceGBP: int
 
@@ -40,6 +41,8 @@ class Doctor(BaseModel):
 class DateRange(BaseModel):
     start: str
     end: str
+    startISO: str
+    endISO: str
 
 
 class TripPlan(BaseModel):

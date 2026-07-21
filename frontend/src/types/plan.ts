@@ -14,6 +14,7 @@ export interface Overview {
 export interface Travel {
   origin: string
   destination: string
+  destinationCity: string
   airline: string
   priceGBP: number
 }
@@ -36,6 +37,8 @@ export interface Doctor {
 export interface DateRange {
   start: string
   end: string
+  startISO: string
+  endISO: string
 }
 
 export interface TripPlan {
