@@ -2,6 +2,8 @@
 
 Çalıştırma:  uvicorn app.main:app --reload
 """
+import os
+
 from dotenv import load_dotenv
 
 load_dotenv()  # .env'i router/servis importlarından ÖNCE yükle (USE_GEMINI okunur)
@@ -14,9 +16,13 @@ from .services import llm  # noqa: E402
 
 app = FastAPI(title="HealRoute AI API", version="0.2.0")
 
+# Prod'da deploy edilen frontend origin'i ALLOWED_ORIGINS ile virgülle ekleyin
+# (ör. "https://healroute.vercel.app"); localhost dev origin'leri her zaman dahildir.
+_extra_origins = [o.strip() for o in os.getenv("ALLOWED_ORIGINS", "").split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173", *_extra_origins],
     allow_methods=["*"],
     allow_headers=["*"],
 )

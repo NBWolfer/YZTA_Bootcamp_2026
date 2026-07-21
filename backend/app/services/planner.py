@@ -103,9 +103,14 @@ def build_plan_and_reply(req: ChatRequest) -> ChatResponse:
     journey = _journey_label(procedure)
     proc_label = PROCEDURE_LABELS[procedure]
 
-    start = date(2024, 10, 14)
+    start = date.today() + timedelta(days=30)
     end = start + timedelta(days=nights)
-    date_range = DateRange(start=start.strftime("%b %d"), end=end.strftime("%b %d, %Y"))
+    date_range = DateRange(
+        start=start.strftime("%b %d"),
+        end=end.strftime("%b %d, %Y"),
+        startISO=start.isoformat(),
+        endISO=end.isoformat(),
+    )
 
     plan = TripPlan(
         summary=Summary(title=f"{city_name} {journey} Journey", region=region, nights=nights),
@@ -113,6 +118,7 @@ def build_plan_and_reply(req: ChatRequest) -> ChatResponse:
         travel=Travel(
             origin=flight["origin"],
             destination=flight["destination"],
+            destinationCity=flight["destinationCity"],
             airline=flight["airline"],
             priceGBP=flight["priceGBP"],
         ),

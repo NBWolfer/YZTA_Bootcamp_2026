@@ -1,4 +1,5 @@
 import type { TripPlan } from '../../types/plan'
+import { openBookingLinks } from '../../utils/booking'
 import OverviewCard from './OverviewCard'
 import TravelCard from './TravelCard'
 import AccommodationCard from './AccommodationCard'
@@ -26,7 +27,9 @@ export default function TripPanel({ plan }: { plan: TripPlan | null }) {
           <CostSummary plan={plan} />
           <Disclaimer text={plan.disclaimer} />
           <div className="trip-actions">
-            <button className="cta">Proceed to Booking</button>
+            <button className="cta" onClick={() => openBookingLinks(plan)}>
+              Proceed to Booking
+            </button>
             <button className="ghost">⤴ Share</button>
           </div>
         </div>
